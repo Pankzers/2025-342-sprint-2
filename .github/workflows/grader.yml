@@ -38,6 +38,8 @@ jobs:
         run: make function_tests # run all executables ending with "_test"
       - name: Run memory tests
         run: .github/workflows/memcheck.sh
+      - name: Run coverage check
+        run: COVERAGE_LOG=/tmp/342_coverage_check.out && make coverage_check -j4 |tee $COVERAGE_LOG && .github/workflows/coverage_check.sh $COVERAGE_LOG
       - name: Verify no changes to the main branch
         run: bash .github/workflows/check_no_change_to_main.sh
       - name: Verify submission not past due date

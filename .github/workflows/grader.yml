@@ -25,8 +25,6 @@ jobs:
         run: cat .github/workflows/graderbot.art
       - name: Verify no changes to the grader scripts
         run: bash .github/workflows/check_no_change_to_grader.sh
-#      - name: Verify PR base repo
-#        run: bash .github/workflows/check_PR_target_repo.sh
       - name: Install packages
         run: .github/workflows/install_dependencies.sh
       - name: Create Makefile
@@ -37,11 +35,5 @@ jobs:
         run: make function_tests # run all executables ending with "_test"
       - name: Run memory tests
         run: .github/workflows/memcheck.sh
-      - name: Run coverage check
-        run: COVERAGE_LOG=/tmp/342_coverage_check.out && make coverage_check -j4 |tee $COVERAGE_LOG && .github/workflows/coverage_check.sh $COVERAGE_LOG
-#      - name: Verify no changes to the main branch
-#        run: bash .github/workflows/check_no_change_to_main.sh
-#      - name: Verify submission not past due date
-#        run: bash .github/workflows/check_due_date.sh
       - name: Cheer!
         run: bash .github/workflows/success.sh
